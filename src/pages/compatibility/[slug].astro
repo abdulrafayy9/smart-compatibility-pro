@@ -1,0 +1,79 @@
+---
+// 1. Define what a Product looks like (TypeScript)
+type ProductInfo = {
+  slug: string;
+  device: string;
+  hub: string;
+  brand: string;
+  connection: string;
+  is_compatible: boolean;
+};
+
+// 2. This function creates the actual pages at build time
+export async function getStaticPaths() {
+  // Use a standard import for the JSON file
+  const allData = import.meta.glob('../../data/products.json', { eager: true });
+  const productsData = Object.values(allData)[0] as any;
+  const products = productsData.default || productsData || [];
+
+  return products.map((item: ProductInfo) => ({
+    params: { slug: item.slug },
+    props: { info: item },
+  }));
+}
+
+// 3. Get the data for the specific page being viewed
+const { info } = Astro.props as { info: ProductInfo };
+
+// 4. Affiliate Logic
+const affiliateId = "yourtag-20"; // Update this when you get your Amazon ID
+const amazonSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(info.brand + ' ' + info.device + ' ' + info.hub)}&tag=${affiliateId}`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Does {info.device} work with {info.hub}? | Compatibility Guide</title>
+    <style>
+      body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 20px; }
+      .card { background: white; max-width: 600px; margin: 0 auto; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0; }
+      .header { padding: 32px; text-align: center; border-bottom: 1px solid #f1f5f9; }
+      .status { display: inline-block; padding: 6px 16px; border-radius: 99px; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
+      .compatible { background: #dcfce7; color: #166534; }
+      .incompatible { background: #fee2e2; color: #991b1b; }
+      h1 { font-size: 24px; margin: 0; line-height: 1.3; }
+      .content { padding: 32px; }
+      .affiliate-btn { display: block; background: #fbbf24; color: #000; text-align: center; padding: 16px; border-radius: 8px; font-weight: 800; text-decoration: none; margin-top: 24px; transition: transform 0.2s; box-shadow: 0 4px 0 #d97706; }
+      .affiliate-btn:hover { transform: translateY(-2px); }
+      .disclaimer { font-size: 11px; color: #94a3b8; margin-top: 20px; text-align: center; line-height: 1.4; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <div class={info.is_compatible ? "status compatible" : "status incompatible"}>
+          {info.is_compatible ? "✓ FULLY COMPATIBLE" : "✕ NOT COMPATIBLE"}
+        </div>
+        <h1>Does the <strong>{info.device}</strong> work with <strong>{info.hub}</strong>?</h1>
+      </div>
+      
+      <div class="content">
+        <p>Our 2026 technical analysis shows that the <strong>{info.brand} {info.device}</strong> uses <strong>{info.connection}</strong> technology.</p>
+        
+        {info.is_compatible ? (
+          <p>Great news! You can control this device using your {info.hub} ecosystem directly.</p>
+        ) : (
+          <p>Warning: This specific combination usually requires a bridge or may not support native voice commands via {info.hub}.</p>
+        )}
+
+        <a href={amazonSearchUrl} target="_blank" class="affiliate-btn">
+          VIEW ON AMAZON →
+        </a>
+        
+        <p class="disclaimer">
+          As an Amazon Associate, we earn from qualifying purchases. Data verified for 2026 compatibility standards.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

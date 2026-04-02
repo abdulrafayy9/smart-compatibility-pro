@@ -1,17 +1,55 @@
 ---
+// 1. Load the data
+const allData = import.meta.glob('../data/products.json', { eager: true });
+const productsData = Object.values(allData)[0] as any;
+const products = productsData.default || productsData || [];
 
+type ProductInfo = {
+  slug: string;
+  device: string;
+  hub: string;
+  brand: string;
+};
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Smart Home Compatibility Checker | 2026 Guide</title>
+		<style>
+			body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; margin: 0; padding: 0; }
+			.container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+			h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+			.subtitle { color: #64748b; font-size: 1.2rem; margin-bottom: 40px; }
+			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+			.card { 
+				background: white; 
+				padding: 24px; 
+				border-radius: 12px; 
+				border: 1px solid #e2e8f0; 
+				text-decoration: none; 
+				color: inherit; 
+				transition: all 0.2s ease;
+			}
+			.card:hover { border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+			.card span { display: block; color: #3b82f6; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
+			.card h2 { margin: 0; font-size: 1.1rem; line-height: 1.4; }
+		</style>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="container">
+			<h1>SmartCheck<span style="color: #3b82f6;">.</span></h1>
+			<p class="subtitle">The ultimate compatibility database for your smart home setup.</p>
+			
+			<div class="grid">
+				{products.map((item: ProductInfo) => (
+					<a href={`/compatibility/${item.slug}`} class="card">
+						<span>{item.brand}</span>
+						<h2>Does {item.device} work with {item.hub}?</h2>
+					</a>
+				))}
+			</div>
+		</div>
 	</body>
 </html>

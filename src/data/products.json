@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "philips-hue-smart-bulb-apple-homekit",
+    "device": "Philips Hue Smart Bulb",
+    "hub": "Apple HomeKit",
+    "brand": "Philips",
+    "connection": "Zigbee/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "ecobee-smart-thermostat-google-home",
+    "device": "Ecobee Smart Thermostat Premium",
+    "hub": "Google Home",
+    "brand": "Ecobee",
+    "connection": "WiFi/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "august-wifi-smart-lock-amazon-alexa",
+    "device": "August Wi-Fi Smart Lock",
+    "hub": "Amazon Alexa",
+    "brand": "August",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "govee-m1-led-strip-samsung-smartthings",
+    "device": "Govee M1 LED Strip",
+    "hub": "Samsung SmartThings",
+    "brand": "Govee",
+    "connection": "WiFi/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "ring-video-doorbell-4-apple-homepod",
+    "device": "Ring Video Doorbell 4",
+    "hub": "Apple HomePod",
+    "brand": "Ring",
+    "connection": "Cloud (Needs Bridge)",
+    "is_compatible": false
+  },
+  {
+    "slug": "aqara-hub-m2-amazon-echo",
+    "device": "Aqara Hub M2",
+    "hub": "Amazon Echo",
+    "brand": "Aqara",
+    "connection": "Zigbee/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "nanoleaf-shapes-google-nest-hub",
+    "device": "Nanoleaf Shapes",
+    "hub": "Google Nest Hub",
+    "brand": "Nanoleaf",
+    "connection": "WiFi/Thread/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "sonos-era-100-apple-home",
+    "device": "Sonos Era 100",
+    "hub": "Apple Home",
+    "brand": "Sonos",
+    "connection": "WiFi/AirPlay 2",
+    "is_compatible": true
+  },
+  {
+    "slug": "tapo-smart-plug-p110-samsung-smartthings",
+    "device": "Tapo Smart Plug (P110)",
+    "hub": "Samsung SmartThings",
+    "brand": "TP-Link",
+    "connection": "WiFi/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "arlo-pro-5-apple-homekit",
+    "device": "Arlo Pro 5 Camera",
+    "hub": "Apple HomeKit",
+    "brand": "Arlo",
+    "connection": "WiFi/SmartHub",
+    "is_compatible": true
+  }
+]
