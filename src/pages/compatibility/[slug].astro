@@ -1,5 +1,5 @@
 ---
-// 1. Define what a Product looks like (TypeScript)
+// 1. Define what a Product looks like (Updated with amazon_url)
 type ProductInfo = {
   slug: string;
   device: string;
@@ -7,11 +7,10 @@ type ProductInfo = {
   brand: string;
   connection: string;
   is_compatible: boolean;
+  amazon_url?: string; // Optional field so old data doesn't crash
 };
 
-// 2. This function creates the actual pages at build time
-export async function getStaticPaths() {
-  // Use a standard import for the JSON file
+export async function getStaticPaths(): Promise<any> {
   const allData = import.meta.glob('../../data/products.json', { eager: true });
   const productsData = Object.values(allData)[0] as any;
   const products = productsData.default || productsData || [];
@@ -25,9 +24,11 @@ export async function getStaticPaths() {
 // 3. Get the data for the specific page being viewed
 const { info } = Astro.props as { info: ProductInfo };
 
-// 4. Affiliate Logic
-const affiliateId = "yourtag-20"; // Update this when you get your Amazon ID
-const amazonSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(info.brand + ' ' + info.device + ' ' + info.hub)}&tag=${affiliateId}`;
+// 2. Dynamic Link Logic (Uses direct URL if available, otherwise searches)
+const affiliateId = "yourtag-20"; 
+const finalAffiliateUrl = info.amazon_url 
+  ? info.amazon_url 
+  : `https://www.amazon.com/s?k=${encodeURIComponent(info.brand + ' ' + info.device)}&tag=${affiliateId}`;
 ---
 
 <html lang="en">
@@ -66,7 +67,7 @@ const amazonSearchUrl = `https://www.amazon.com/s?k=${encodeURIComponent(info.br
           <p>Warning: This specific combination usually requires a bridge or may not support native voice commands via {info.hub}.</p>
         )}
 
-        <a href={amazonSearchUrl} target="_blank" class="affiliate-btn">
+        <a href={finalAffiliateUrl} target="_blank" class="affiliate-btn">
           VIEW ON AMAZON →
         </a>
         
