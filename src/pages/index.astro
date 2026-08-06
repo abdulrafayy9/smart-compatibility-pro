@@ -1,5 +1,4 @@
 ---
-// 1. Load the data
 const allData = import.meta.glob('../data/products.json', { eager: true });
 const productsData = Object.values(allData)[0] as any;
 const products = productsData.default || productsData || [];
@@ -9,6 +8,8 @@ type ProductInfo = {
   device: string;
   hub: string;
   brand: string;
+  connection: string;
+  is_compatible: boolean;
 };
 ---
 
@@ -16,6 +17,7 @@ type ProductInfo = {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content="Check whether your smart home devices work with Apple HomeKit, Google Home, Amazon Alexa, and Samsung SmartThings. Updated compatibility guide." />
 		<title>Smart Home Compatibility Checker | 2026 Guide</title>
 		<style>
 			body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; margin: 0; padding: 0; }
@@ -35,6 +37,8 @@ type ProductInfo = {
 			.card:hover { border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
 			.card span { display: block; color: #3b82f6; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
 			.card h2 { margin: 0; font-size: 1.1rem; line-height: 1.4; }
+			footer { margin-top: 60px; text-align: center; font-size: 13px; color: #94a3b8; }
+			footer a { color: #94a3b8; text-decoration: none; margin: 0 6px; }
 		</style>
 	</head>
 	<body>
@@ -50,6 +54,10 @@ type ProductInfo = {
 					</a>
 				))}
 			</div>
+
+			<footer>
+				<a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a>
+			</footer>
 		</div>
 	</body>
 </html>

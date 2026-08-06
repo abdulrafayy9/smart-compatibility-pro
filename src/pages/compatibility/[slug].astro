@@ -1,5 +1,4 @@
 ---
-// 1. Define what a Product looks like (Updated with amazon_url)
 type ProductInfo = {
   slug: string;
   device: string;
@@ -7,7 +6,8 @@ type ProductInfo = {
   brand: string;
   connection: string;
   is_compatible: boolean;
-  amazon_url?: string; // Optional field so old data doesn't crash
+  amazon_url?: string;
+  last_checked?: string; // optional, e.g. "2026-07-01" — add this to entries as you update them
 };
 
 export async function getStaticPaths(): Promise<any> {
@@ -21,22 +21,26 @@ export async function getStaticPaths(): Promise<any> {
   }));
 }
 
-// 3. Get the data for the specific page being viewed
 const { info } = Astro.props as { info: ProductInfo };
 
-// 2. Dynamic Link Logic (Uses direct URL if available, otherwise searches)
-const affiliateId = "yourtag-20"; 
-const finalAffiliateUrl = info.amazon_url 
-  ? info.amazon_url 
+const affiliateId = "yourtag-20";
+const finalAffiliateUrl = info.amazon_url
+  ? info.amazon_url
   : `https://www.amazon.com/s?k=${encodeURIComponent(info.brand + ' ' + info.device)}&tag=${affiliateId}`;
+
+const pageDescription = `Does the ${info.brand} ${info.device} work with ${info.hub}? It connects via ${info.connection}. ${info.is_compatible ? "Fully compatible" : "Not natively compatible"} — see setup details and what to expect.`;
+
+const lastChecked = info.last_checked || "2026";
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={pageDescription} />
     <title>Does {info.device} work with {info.hub}? | Compatibility Guide</title>
     <style>
-      body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 20px; }
+      body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 20px; margin: 0; }
       .card { background: white; max-width: 600px; margin: 0 auto; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0; }
       .header { padding: 32px; text-align: center; border-bottom: 1px solid #f1f5f9; }
       .status { display: inline-block; padding: 6px 16px; border-radius: 99px; font-weight: 700; font-size: 14px; margin-bottom: 16px; }
@@ -47,34 +51,41 @@ const finalAffiliateUrl = info.amazon_url
       .affiliate-btn { display: block; background: #fbbf24; color: #000; text-align: center; padding: 16px; border-radius: 8px; font-weight: 800; text-decoration: none; margin-top: 24px; transition: transform 0.2s; box-shadow: 0 4px 0 #d97706; }
       .affiliate-btn:hover { transform: translateY(-2px); }
       .disclaimer { font-size: 11px; color: #94a3b8; margin-top: 20px; text-align: center; line-height: 1.4; }
+      .disclaimer a { color: #94a3b8; }
+      footer { max-width: 600px; margin: 24px auto 0; text-align: center; font-size: 13px; color: #94a3b8; }
+      footer a { color: #94a3b8; text-decoration: none; margin: 0 6px; }
     </style>
   </head>
   <body>
     <div class="card">
       <div class="header">
         <div class={info.is_compatible ? "status compatible" : "status incompatible"}>
-          {info.is_compatible ? "✓ FULLY COMPATIBLE" : "✕ NOT COMPATIBLE"}
+          {info.is_compatible ? "✓ FULLY COMPATIBLE" : "✕ NOT NATIVELY COMPATIBLE"}
         </div>
         <h1>Does the <strong>{info.device}</strong> work with <strong>{info.hub}</strong>?</h1>
       </div>
-      
+
       <div class="content">
-        <p>Our 2026 technical analysis shows that the <strong>{info.brand} {info.device}</strong> uses <strong>{info.connection}</strong> technology.</p>
-        
+        <p>The <strong>{info.brand} {info.device}</strong> connects using <strong>{info.connection}</strong>.</p>
+
         {info.is_compatible ? (
-          <p>Great news! You can control this device using your {info.hub} ecosystem directly.</p>
+          <p>Since it uses {info.connection}, it pairs directly with {info.hub} — no extra bridge or hardware needed to get it working.</p>
         ) : (
-          <p>Warning: This specific combination usually requires a bridge or may not support native voice commands via {info.hub}.</p>
+          <p>Because it connects via <strong>{info.connection}</strong>, this device won't pair with {info.hub} out of the box. You'll likely need a bridge, hub, or workaround — check the manufacturer's current documentation before buying.</p>
         )}
 
-        <a href={finalAffiliateUrl} target="_blank" class="affiliate-btn">
+        <a href={finalAffiliateUrl} target="_blank" rel="nofollow sponsored" class="affiliate-btn">
           VIEW ON AMAZON →
         </a>
-        
+
         <p class="disclaimer">
-          As an Amazon Associate, we earn from qualifying purchases. Data verified for 2026 compatibility standards.
+          As an Amazon Associate, we earn from qualifying purchases. Compatibility data last checked: {lastChecked}. See our <a href="/privacy-policy">Privacy Policy</a>.
         </p>
       </div>
     </div>
+
+    <footer>
+      <a href="/">Home</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a>
+    </footer>
   </body>
 </html>
