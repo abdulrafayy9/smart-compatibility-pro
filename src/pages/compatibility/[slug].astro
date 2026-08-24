@@ -7,7 +7,7 @@ type ProductInfo = {
   connection: string;
   is_compatible: boolean;
   amazon_url?: string;
-  last_checked?: string; // optional, e.g. "2026-07-01" — add this to entries as you update them
+  last_checked?: string;
 };
 
 export async function getStaticPaths(): Promise<any> {
@@ -23,12 +23,16 @@ export async function getStaticPaths(): Promise<any> {
 
 const { info } = Astro.props as { info: ProductInfo };
 
+// Fix: only prepend the brand if it isn't already part of the device name
+const brandAlreadyInName = info.device.toLowerCase().includes(info.brand.toLowerCase());
+const fullName = brandAlreadyInName ? info.device : `${info.brand} ${info.device}`;
+
 const affiliateId = "yourtag-20";
 const finalAffiliateUrl = info.amazon_url
   ? info.amazon_url
-  : `https://www.amazon.com/s?k=${encodeURIComponent(info.brand + ' ' + info.device)}&tag=${affiliateId}`;
+  : `https://www.amazon.com/s?k=${encodeURIComponent(fullName)}&tag=${affiliateId}`;
 
-const pageDescription = `Does the ${info.brand} ${info.device} work with ${info.hub}? It connects via ${info.connection}. ${info.is_compatible ? "Fully compatible" : "Not natively compatible"} — see setup details and what to expect.`;
+const pageDescription = `Does the ${fullName} work with ${info.hub}? It connects via ${info.connection}. ${info.is_compatible ? "Fully compatible" : "Not natively compatible"} — see setup details and what to expect.`;
 
 const lastChecked = info.last_checked || "2026";
 ---
@@ -66,7 +70,7 @@ const lastChecked = info.last_checked || "2026";
       </div>
 
       <div class="content">
-        <p>The <strong>{info.brand} {info.device}</strong> connects using <strong>{info.connection}</strong>.</p>
+        <p>The <strong>{fullName}</strong> connects using <strong>{info.connection}</strong>.</p>
 
         {info.is_compatible ? (
           <p>Since it uses {info.connection}, it pairs directly with {info.hub} — no extra bridge or hardware needed to get it working.</p>
