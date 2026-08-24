@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'www.devicecompat.com',
+  site: 'https://devicecompat.com',
   integrations: [sitemap()],
 });
