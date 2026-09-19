@@ -4,5 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://devicecompat.com',
+  trailingSlash: 'always',
   integrations: [sitemap()],
 });

@@ -1,0 +1,72 @@
+---
+export async function getStaticPaths() {
+  const allData = import.meta.glob('../../data/products.json', { eager: true });
+  const productsData = Object.values(allData)[0] as any;
+  const products = productsData.default || productsData || [];
+
+  function toSlug(str: string) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  const hubMap = new Map();
+  for (const item of products) {
+    const slug = toSlug(item.hub);
+    if (!hubMap.has(slug)) hubMap.set(slug, { hub: item.hub, items: [] });
+    hubMap.get(slug).items.push(item);
+  }
+
+  return Array.from(hubMap.entries()).map(([slug, data]) => ({
+    params: { hub: slug },
+    props: { hubName: data.hub, items: data.items },
+  }));
+}
+
+const { hubName, items } = Astro.props as { hubName: string; items: any[] };
+const compatibleCount = items.filter((i) => i.is_compatible).length;
+const pageDescription = `See every smart home device checked for ${hubName} compatibility — ${compatibleCount} of ${items.length} confirmed compatible.`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={pageDescription} />
+    <title>{hubName} Compatible Devices | SmartCheck</title>
+    <style>
+      body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; margin: 0; padding: 0; }
+      .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+      .back { display: inline-block; margin-bottom: 24px; color: #3b82f6; text-decoration: none; font-size: 14px; }
+      h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+      .subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 40px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+      .card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; transition: all 0.2s ease; }
+      .card:hover { border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+      .card span { display: block; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
+      .yes { color: #16a34a; }
+      .no { color: #dc2626; }
+      .card h2 { margin: 0; font-size: 1.05rem; line-height: 1.4; }
+      footer { margin-top: 60px; text-align: center; font-size: 13px; color: #94a3b8; }
+      footer a { color: #94a3b8; text-decoration: none; margin: 0 6px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/" class="back">← All devices</a>
+      <h1>{hubName} Compatibility</h1>
+      <p class="subtitle">{compatibleCount} of {items.length} devices we've checked work with {hubName}.</p>
+
+      <div class="grid">
+        {items.map((item) => (
+          <a href={`/compatibility/${item.slug}/`} class="card">
+            <span class={item.is_compatible ? "yes" : "no"}>{item.is_compatible ? "✓ Compatible" : "✕ Not compatible"}</span>
+            <h2>{item.device}</h2>
+          </a>
+        ))}
+      </div>
+
+      <footer>
+        <a href="/">Home</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
+      </footer>
+    </div>
+  </body>
+</html>

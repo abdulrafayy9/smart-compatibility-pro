@@ -11,6 +11,10 @@ type ProductInfo = {
   connection: string;
   is_compatible: boolean;
 };
+
+function toSlug(str: string) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
 ---
 
 <html lang="en">
@@ -24,19 +28,23 @@ type ProductInfo = {
 			.container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
 			h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
 			.subtitle { color: #64748b; font-size: 1.2rem; margin-bottom: 40px; }
+			.section-title { font-size: 1.3rem; font-weight: 700; margin: 48px 0 16px; }
+			.hub-links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+			.hub-links a { background: white; border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 99px; text-decoration: none; color: #1e293b; font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease; }
+			.hub-links a:hover { border-color: #3b82f6; color: #3b82f6; }
 			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 			.card { 
 				background: white; 
 				padding: 24px; 
 				border-radius: 12px; 
 				border: 1px solid #e2e8f0; 
-				text-decoration: none; 
-				color: inherit; 
 				transition: all 0.2s ease;
 			}
 			.card:hover { border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-			.card span { display: block; color: #3b82f6; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
-			.card h2 { margin: 0; font-size: 1.1rem; line-height: 1.4; }
+			.brand-tag { display: inline-block; color: #3b82f6; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; text-decoration: none; }
+			.brand-tag:hover { text-decoration: underline; }
+			.card-title { display: block; text-decoration: none; color: inherit; }
+			.card-title h2 { margin: 0; font-size: 1.1rem; line-height: 1.4; }
 			footer { margin-top: 60px; text-align: center; font-size: 13px; color: #94a3b8; }
 			footer a { color: #94a3b8; text-decoration: none; margin: 0 6px; }
 		</style>
@@ -45,18 +53,28 @@ type ProductInfo = {
 		<div class="container">
 			<h1>SmartCheck<span style="color: #3b82f6;">.</span></h1>
 			<p class="subtitle">The ultimate compatibility database for your smart home setup.</p>
+
+			<div class="section-title">Browse by hub</div>
+			<div class="hub-links">
+				<a href="/hubs/apple-home/">Apple Home</a>
+				<a href="/hubs/google-home/">Google Home</a>
+				<a href="/hubs/amazon-alexa/">Amazon Alexa</a>
+				<a href="/hubs/samsung-smartthings/">Samsung SmartThings</a>
+			</div>
 			
 			<div class="grid">
 				{products.map((item: ProductInfo) => (
-					<a href={`/compatibility/${item.slug}`} class="card">
-						<span>{item.brand}</span>
-						<h2>Does {item.device} work with {item.hub}?</h2>
-					</a>
+					<div class="card">
+						<a href={`/brands/${toSlug(item.brand)}/`} class="brand-tag">{item.brand}</a>
+						<a href={`/compatibility/${item.slug}/`} class="card-title">
+							<h2>Does {item.device} work with {item.hub}?</h2>
+						</a>
+					</div>
 				))}
 			</div>
 
 			<footer>
-				<a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a>
+				<a href="/">Home</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
 			</footer>
 		</div>
 	</body>

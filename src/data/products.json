@@ -42,7 +42,7 @@
   {
     "slug": "aqara-hub-m2-amazon-echo",
     "device": "Aqara Hub M2",
-    "hub": "Amazon Echo",
+    "hub": "Amazon Alexa",
     "brand": "Aqara",
     "connection": "Zigbee/Matter",
     "is_compatible": true
@@ -50,7 +50,7 @@
   {
     "slug": "nanoleaf-shapes-google-nest-hub",
     "device": "Nanoleaf Shapes",
-    "hub": "Google Nest Hub",
+    "hub": "Google Home",
     "brand": "Nanoleaf",
     "connection": "WiFi/Thread/Matter",
     "is_compatible": true
@@ -198,7 +198,7 @@
   { "slug": "eufy-video-doorbell-e340-amazon-alexa", "device": "Eufy Video Doorbell E340", "hub": "Amazon Alexa", "brand": "Eufy", "connection": "WiFi", "is_compatible": true },
   { "slug": "shelly-plus-1-samsung-smartthings", "device": "Shelly Plus 1 Relay", "hub": "Samsung SmartThings", "brand": "Shelly", "connection": "WiFi", "is_compatible": true },
   { "slug": "ultraloq-u-bolt-pro-google-home", "device": "Ultraloq U-Bolt Pro WiFi", "hub": "Google Home", "brand": "Ultraloq", "connection": "WiFi", "is_compatible": true },
-  { "slug": "sengled-smart-bulb-amazon-echo", "device": "Sengled Zigbee Color Bulb", "hub": "Amazon Echo", "brand": "Sengled", "connection": "Zigbee", "is_compatible": true },
+  { "slug": "sengled-smart-bulb-amazon-echo", "device": "Sengled Zigbee Color Bulb", "hub": "Amazon Alexa", "brand": "Sengled", "connection": "Zigbee", "is_compatible": true },
   { "slug": "wyze-thermostat-apple-homekit", "device": "Wyze Smart Thermostat", "hub": "Apple Home", "brand": "Wyze", "connection": "WiFi (Not Native)", "is_compatible": false },
   { "slug": "sonoff-mini-r4-google-home", "device": "SONOFF Mini R4 Extreme", "hub": "Google Home", "brand": "SONOFF", "connection": "WiFi", "is_compatible": true },
   { "slug": "switchbot-hub-2-apple-homekit", "device": "SwitchBot Hub 2", "hub": "Apple Home", "brand": "SwitchBot", "connection": "Matter (Bridges IR devices)", "is_compatible": true },

@@ -23,7 +23,6 @@ export async function getStaticPaths(): Promise<any> {
 
 const { info } = Astro.props as { info: ProductInfo };
 
-// Fix: only prepend the brand if it isn't already part of the device name
 const brandAlreadyInName = info.device.toLowerCase().includes(info.brand.toLowerCase());
 const fullName = brandAlreadyInName ? info.device : `${info.brand} ${info.device}`;
 
@@ -35,6 +34,12 @@ const finalAffiliateUrl = info.amazon_url
 const pageDescription = `Does the ${fullName} work with ${info.hub}? It connects via ${info.connection}. ${info.is_compatible ? "Fully compatible" : "Not natively compatible"} — see setup details and what to expect.`;
 
 const lastChecked = info.last_checked || "2026";
+
+function toSlug(str: string) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+const brandSlug = toSlug(info.brand);
+const hubSlug = toSlug(info.hub);
 ---
 
 <html lang="en">
@@ -56,6 +61,9 @@ const lastChecked = info.last_checked || "2026";
       .affiliate-btn:hover { transform: translateY(-2px); }
       .disclaimer { font-size: 11px; color: #94a3b8; margin-top: 20px; text-align: center; line-height: 1.4; }
       .disclaimer a { color: #94a3b8; }
+      .related-links { margin-top: 24px; padding-top: 16px; border-top: 1px solid #f1f5f9; text-align: center; font-size: 13px; }
+      .related-links a { color: #3b82f6; text-decoration: none; font-weight: 600; }
+      .related-links a:hover { text-decoration: underline; }
       footer { max-width: 600px; margin: 24px auto 0; text-align: center; font-size: 13px; color: #94a3b8; }
       footer a { color: #94a3b8; text-decoration: none; margin: 0 6px; }
     </style>
@@ -83,13 +91,19 @@ const lastChecked = info.last_checked || "2026";
         </a>
 
         <p class="disclaimer">
-          As an Amazon Associate, we earn from qualifying purchases. Compatibility data last checked: {lastChecked}. See our <a href="/privacy-policy">Privacy Policy</a>.
+          As an Amazon Associate, we earn from qualifying purchases. Compatibility data last checked: {lastChecked}. See our <a href="/privacy-policy/">Privacy Policy</a>.
         </p>
+
+        <div class="related-links">
+          <a href={`/brands/${brandSlug}/`}>More {info.brand} devices</a>
+          &nbsp;·&nbsp;
+          <a href={`/hubs/${hubSlug}/`}>More {info.hub} compatible devices</a>
+        </div>
       </div>
     </div>
 
     <footer>
-      <a href="/">Home</a> · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a>
+      <a href="/">Home</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
     </footer>
   </body>
 </html>
