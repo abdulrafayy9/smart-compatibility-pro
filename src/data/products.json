@@ -5,15 +5,19 @@
     "hub": "Apple Home",
     "brand": "Philips",
     "connection": "Zigbee/Matter",
-    "is_compatible": true
+    "is_compatible": true,
+    "setup_note": "Requires a separate Philips Hue Bridge. In the Hue app, go to Settings > Smart home & voice > Siri & Apple Home and follow the pairing steps.",
+    "limitation": "This won't connect to Apple Home without the Hue Bridge (sold separately, around $60) — the bulb alone can't pair directly."
   },
   {
     "slug": "ecobee-smart-thermostat-google-home",
     "device": "Ecobee Smart Thermostat Premium",
     "hub": "Google Home",
     "brand": "Ecobee",
-    "connection": "WiFi/Matter",
-    "is_compatible": true
+    "connection": "WiFi",
+    "is_compatible": true,
+    "setup_note": "Link your Ecobee account as a 'Works with Google' service in the Google Home app, then sign in with your Ecobee credentials.",
+    "limitation": "Ecobee does not support Matter, so this is a cloud-based connection, not a local one. Your thermostat needs an active internet connection for Google Home control, and detailed energy reports stay in the Ecobee app only."
   },
   {
     "slug": "august-wifi-smart-lock-amazon-alexa",
@@ -29,7 +33,9 @@
     "hub": "Samsung SmartThings",
     "brand": "Govee",
     "connection": "WiFi/Matter",
-    "is_compatible": true
+    "is_compatible": true,
+    "setup_note": "Pair the strip in the Govee Home app first, then use the in-app QR code to add it to SmartThings through Matter.",
+    "limitation": "Your router needs IPv6 enabled for Matter pairing to work. Music-sync and gradient effects only work in the Govee app — SmartThings control is limited to on/off, color, and brightness."
   },
   {
     "slug": "ring-video-doorbell-4-apple-homepod",
@@ -79,140 +85,334 @@
     "connection": "WiFi/SmartHub",
     "is_compatible": true
   },
-  { "slug": "lifx-smart-bulb-apple-homekit",
+  {
+    "slug": "lifx-smart-bulb-apple-homekit",
     "device": "LIFX Color Bulb",
     "hub": "Apple Home",
     "brand": "LIFX",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "wemo-smart-plug-google-home",
+  {
+    "slug": "wemo-smart-plug-google-home",
     "device": "Wemo WiFi Smart Plug",
     "hub": "Google Home",
     "brand": "Wemo",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": false,
+    "setup_note": "No setup is possible — Belkin discontinued this integration.",
+    "limitation": "Belkin shut down all Wemo cloud services, including Google Home and Alexa integration, on January 31, 2026. This plug can no longer be controlled through Google Home. Only a small number of newer Thread/HomeKit Wemo models remain supported, and this isn't one of them."
   },
-  { "slug": "wiz-smart-bulb-amazon-alexa",
+  {
+    "slug": "wiz-smart-bulb-amazon-alexa",
     "device": "WiZ Smart Bulb",
     "hub": "Amazon Alexa",
     "brand": "WiZ",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true,
+    "setup_note": "In the WiZ app, go to Settings > Integrations > Amazon Alexa > Link my account, then sign in with your Amazon account.",
+    "limitation": "WiZ bulbs only support 2.4GHz Wi-Fi, not 5GHz. Rooms and groups created in the WiZ app only support on/off and dimming through Alexa — recreate them as Alexa Groups for full color control."
   },
-  { "slug": "schlage-encode-smart-lock-amazon-alexa",
+  {
+    "slug": "schlage-encode-smart-lock-amazon-alexa",
     "device": "Schlage Encode",
     "hub": "Amazon Alexa",
     "brand": "Schlage",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "lutron-caseta-dimmer-apple-homekit",
+  {
+    "slug": "lutron-caseta-dimmer-apple-homekit",
     "device": "Lutron Caseta Dimmer",
     "hub": "Apple Home",
     "brand": "Lutron",
     "connection": "Clear Connect",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "wyze-cam-v4-google-home",
+  {
+    "slug": "wyze-cam-v4-google-home",
     "device": "Wyze Cam v4",
     "hub": "Google Home",
     "brand": "Wyze",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "eufy-security-camera-apple-homekit",
+  {
+    "slug": "eufy-security-camera-apple-homekit",
     "device": "EufyCam 3",
     "hub": "Apple Home",
     "brand": "Eufy",
     "connection": "WiFi/HomeBase",
-    "is_compatible": false 
+    "is_compatible": false
   },
-  { "slug": "yale-assure-lock-2-matter-apple-home",
+  {
+    "slug": "yale-assure-lock-2-matter-apple-home",
     "device": "Yale Assure Lock 2",
     "hub": "Apple Home",
     "brand": "Yale",
     "connection": "Matter/Thread",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "switchbot-curtain-3-google-home",
+  {
+    "slug": "switchbot-curtain-3-google-home",
     "device": "SwitchBot Curtain 3",
     "hub": "Google Home",
     "brand": "SwitchBot",
     "connection": "Matter",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "ikea-tradfri-bulb-samsung-smartthings",
+  {
+    "slug": "ikea-tradfri-bulb-samsung-smartthings",
     "device": "IKEA Tradfri Bulb",
     "hub": "Samsung SmartThings",
     "brand": "IKEA",
     "connection": "Zigbee",
-    "is_compatible": true 
+    "is_compatible": true
   },
- { "slug": "ring-stick-up-cam-amazon-alexa",
-   "device": "Ring Stick Up Cam",
-   "hub": "Amazon Alexa",
-   "brand": "Ring",
-   "connection": "WiFi",
-   "is_compatible": true 
+  {
+    "slug": "ring-stick-up-cam-amazon-alexa",
+    "device": "Ring Stick Up Cam",
+    "hub": "Amazon Alexa",
+    "brand": "Ring",
+    "connection": "WiFi",
+    "is_compatible": true,
+    "setup_note": "Enable the Ring skill in the Alexa app, then sign in with your Ring account to discover your camera.",
+    "limitation": "Live view, motion alerts, and two-way talk through Alexa are free. Arming/disarming modes and saved video history require a paid Ring Protect subscription."
   },
-  { "slug": "blink-outdoor-4-google-home",
+  {
+    "slug": "blink-outdoor-4-google-home",
     "device": "Blink Outdoor 4",
     "hub": "Google Home",
     "brand": "Blink",
     "connection": "WiFi (Limited Features)",
-    "is_compatible": false 
+    "is_compatible": false
   },
-  { "slug": "nanoleaf-essentials-bulb-apple-homekit",
+  {
+    "slug": "nanoleaf-essentials-bulb-apple-homekit",
     "device": "Nanoleaf Essentials Matter Bulb",
     "hub": "Apple Home",
     "brand": "Nanoleaf",
     "connection": "Thread/Matter",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "tp-link-kasa-smart-plug-amazon-alexa",
+  {
+    "slug": "tp-link-kasa-smart-plug-amazon-alexa",
     "device": "Kasa Smart Plug Mini",
     "hub": "Amazon Alexa",
     "brand": "TP-Link",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "meross-garage-door-opener-apple-home",
+  {
+    "slug": "meross-garage-door-opener-apple-home",
     "device": "Meross Smart Garage Door Opener",
     "hub": "Apple Home",
     "brand": "Meross",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "reolink-argus-4-pro-google-home",
+  {
+    "slug": "reolink-argus-4-pro-google-home",
     "device": "Reolink Argus 4 Pro",
     "hub": "Google Home",
     "brand": "Reolink",
     "connection": "WiFi",
-    "is_compatible": true 
+    "is_compatible": true
   },
-  { "slug": "aqara-door-sensor-p2-samsung-smartthings", "device": "Aqara Door and Window Sensor P2", "hub": "Samsung SmartThings", "brand": "Aqara", "connection": "Thread/Matter", "is_compatible": true },
-  { "slug": "govee-neon-rope-light-2-amazon-alexa", "device": "Govee Neon Rope Light 2", "hub": "Amazon Alexa", "brand": "Govee", "connection": "WiFi/Bluetooth", "is_compatible": true },
-  { "slug": "tuya-smart-valve-apple-homekit", "device": "Tuya Smart Water Valve", "hub": "Apple Home", "brand": "Tuya", "connection": "Zigbee (Needs HomeKit Bridge)", "is_compatible": false },
-  { "slug": "level-lock-plus-apple-homekey", "device": "Level Lock+", "hub": "Apple Home", "brand": "Level", "connection": "Bluetooth/Thread", "is_compatible": true },
-  { "slug": "eufy-video-doorbell-e340-amazon-alexa", "device": "Eufy Video Doorbell E340", "hub": "Amazon Alexa", "brand": "Eufy", "connection": "WiFi", "is_compatible": true },
-  { "slug": "shelly-plus-1-samsung-smartthings", "device": "Shelly Plus 1 Relay", "hub": "Samsung SmartThings", "brand": "Shelly", "connection": "WiFi", "is_compatible": true },
-  { "slug": "ultraloq-u-bolt-pro-google-home", "device": "Ultraloq U-Bolt Pro WiFi", "hub": "Google Home", "brand": "Ultraloq", "connection": "WiFi", "is_compatible": true },
-  { "slug": "sengled-smart-bulb-amazon-echo", "device": "Sengled Zigbee Color Bulb", "hub": "Amazon Alexa", "brand": "Sengled", "connection": "Zigbee", "is_compatible": true },
-  { "slug": "wyze-thermostat-apple-homekit", "device": "Wyze Smart Thermostat", "hub": "Apple Home", "brand": "Wyze", "connection": "WiFi (Not Native)", "is_compatible": false },
-  { "slug": "sonoff-mini-r4-google-home", "device": "SONOFF Mini R4 Extreme", "hub": "Google Home", "brand": "SONOFF", "connection": "WiFi", "is_compatible": true },
-  { "slug": "switchbot-hub-2-apple-homekit", "device": "SwitchBot Hub 2", "hub": "Apple Home", "brand": "SwitchBot", "connection": "Matter (Bridges IR devices)", "is_compatible": true },
-  { "slug": "govee-smart-plug-samsung-smartthings", "device": "Govee Dual Smart Plug", "hub": "Samsung SmartThings", "brand": "Govee", "connection": "WiFi", "is_compatible": true },
-  { "slug": "philips-hue-play-gradient-lightstrip-amazon-alexa", "device": "Philips Hue Play Gradient Lightstrip", "hub": "Amazon Alexa", "brand": "Philips", "connection": "Zigbee/Bluetooth", "is_compatible": true },
-  { "slug": "ring-floodlight-cam-apple-homekit", "device": "Ring Floodlight Cam Wired Plus", "hub": "Apple Home", "brand": "Ring", "connection": "Cloud (Needs Homebridge)", "is_compatible": false },
-  { "slug": "lutron-aurora-smart-bulb-dimmer-amazon-alexa", "device": "Lutron Aurora Dimmer", "hub": "Amazon Alexa", "brand": "Lutron", "connection": "Zigbee", "is_compatible": true },
-  { "slug": "eve-energy-smart-plug-google-home", "device": "Eve Energy", "hub": "Google Home", "brand": "Eve", "connection": "Thread/Matter", "is_compatible": true },
-  { "slug": "tapo-c210-pan-tilt-camera-amazon-alexa", "device": "Tapo C210 Security Camera", "hub": "Amazon Alexa", "brand": "TP-Link", "connection": "WiFi", "is_compatible": true },
-  { "slug": "august-smart-lock-pro-samsung-smartthings", "device": "August Smart Lock Pro (4th Gen)", "hub": "Samsung SmartThings", "brand": "August", "connection": "Z-Wave/WiFi", "is_compatible": true },
-  { "slug": "yale-assure-2-google-home", "device": "Yale Assure Lock 2 Touch", "hub": "Google Home", "brand": "Yale", "connection": "WiFi/Bluetooth", "is_compatible": true },
-  { "slug": "aqara-presence-sensor-fp2-apple-homekit", "device": "Aqara Presence Sensor FP2", "hub": "Apple Home", "brand": "Aqara", "connection": "WiFi", "is_compatible": true },
-  { "slug": "ecobee-enhanced-thermostat-amazon-alexa", "device": "Ecobee Smart Thermostat Enhanced", "hub": "Amazon Alexa", "brand": "Ecobee", "connection": "WiFi", "is_compatible": true },
-  { "slug": "lifx-clean-antibacterial-bulb-google-home", "device": "LIFX Clean Bulb", "hub": "Google Home", "brand": "LIFX", "connection": "WiFi", "is_compatible": true },
-  { "slug": "wemo-stage-scene-controller-apple-home", "device": "Wemo Stage Scene Controller", "hub": "Apple Home", "brand": "Wemo", "connection": "Thread/Bluetooth", "is_compatible": true },
-  { "slug": "govee-rgbic-tv-backlight-3-lite-apple-homekit", "device": "Govee TV Backlight 3 Lite", "hub": "Apple Home", "brand": "Govee", "connection": "WiFi (No Native Support)", "is_compatible": false }
+  {
+    "slug": "aqara-door-sensor-p2-samsung-smartthings",
+    "device": "Aqara Door and Window Sensor P2",
+    "hub": "Samsung SmartThings",
+    "brand": "Aqara",
+    "connection": "Thread/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "govee-neon-rope-light-2-amazon-alexa",
+    "device": "Govee Neon Rope Light 2",
+    "hub": "Amazon Alexa",
+    "brand": "Govee",
+    "connection": "WiFi/Bluetooth",
+    "is_compatible": true
+  },
+  {
+    "slug": "tuya-smart-valve-apple-homekit",
+    "device": "Tuya Smart Water Valve",
+    "hub": "Apple Home",
+    "brand": "Tuya",
+    "connection": "Zigbee (Needs HomeKit Bridge)",
+    "is_compatible": false
+  },
+  {
+    "slug": "level-lock-plus-apple-homekey",
+    "device": "Level Lock+",
+    "hub": "Apple Home",
+    "brand": "Level",
+    "connection": "Bluetooth/Thread",
+    "is_compatible": true
+  },
+  {
+    "slug": "eufy-video-doorbell-e340-amazon-alexa",
+    "device": "Eufy Video Doorbell E340",
+    "hub": "Amazon Alexa",
+    "brand": "Eufy",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "shelly-plus-1-samsung-smartthings",
+    "device": "Shelly Plus 1 Relay",
+    "hub": "Samsung SmartThings",
+    "brand": "Shelly",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "ultraloq-u-bolt-pro-google-home",
+    "device": "Ultraloq U-Bolt Pro WiFi",
+    "hub": "Google Home",
+    "brand": "Ultraloq",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "sengled-smart-bulb-amazon-echo",
+    "device": "Sengled Zigbee Color Bulb",
+    "hub": "Amazon Alexa",
+    "brand": "Sengled",
+    "connection": "Zigbee",
+    "is_compatible": true
+  },
+  {
+    "slug": "wyze-thermostat-apple-homekit",
+    "device": "Wyze Smart Thermostat",
+    "hub": "Apple Home",
+    "brand": "Wyze",
+    "connection": "WiFi (Not Native)",
+    "is_compatible": false
+  },
+  {
+    "slug": "sonoff-mini-r4-google-home",
+    "device": "SONOFF Mini R4 Extreme",
+    "hub": "Google Home",
+    "brand": "SONOFF",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "switchbot-hub-2-apple-homekit",
+    "device": "SwitchBot Hub 2",
+    "hub": "Apple Home",
+    "brand": "SwitchBot",
+    "connection": "Matter (Bridges IR devices)",
+    "is_compatible": true
+  },
+  {
+    "slug": "govee-smart-plug-samsung-smartthings",
+    "device": "Govee Dual Smart Plug",
+    "hub": "Samsung SmartThings",
+    "brand": "Govee",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "philips-hue-play-gradient-lightstrip-amazon-alexa",
+    "device": "Philips Hue Play Gradient Lightstrip",
+    "hub": "Amazon Alexa",
+    "brand": "Philips",
+    "connection": "Zigbee/Bluetooth",
+    "is_compatible": true
+  },
+  {
+    "slug": "ring-floodlight-cam-apple-homekit",
+    "device": "Ring Floodlight Cam Wired Plus",
+    "hub": "Apple Home",
+    "brand": "Ring",
+    "connection": "Cloud (Needs Homebridge)",
+    "is_compatible": false
+  },
+  {
+    "slug": "lutron-aurora-smart-bulb-dimmer-amazon-alexa",
+    "device": "Lutron Aurora Dimmer",
+    "hub": "Amazon Alexa",
+    "brand": "Lutron",
+    "connection": "Zigbee",
+    "is_compatible": true
+  },
+  {
+    "slug": "eve-energy-smart-plug-google-home",
+    "device": "Eve Energy",
+    "hub": "Google Home",
+    "brand": "Eve",
+    "connection": "Thread/Matter",
+    "is_compatible": true
+  },
+  {
+    "slug": "tapo-c210-pan-tilt-camera-amazon-alexa",
+    "device": "Tapo C210 Security Camera",
+    "hub": "Amazon Alexa",
+    "brand": "TP-Link",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "august-smart-lock-pro-samsung-smartthings",
+    "device": "August Smart Lock Pro (4th Gen)",
+    "hub": "Samsung SmartThings",
+    "brand": "August",
+    "connection": "Z-Wave/WiFi",
+    "is_compatible": true,
+    "setup_note": "In the August app, go to Lock Settings > Z-Wave Settings > Add to Z-Wave Network, then start inclusion mode on your SmartThings hub within 30 seconds.",
+    "limitation": "Requires the optional Z-Wave module (August Connect Sense) to be installed on the lock — without it, the lock only works over Bluetooth and Wi-Fi, not SmartThings."
+  },
+  {
+    "slug": "yale-assure-2-google-home",
+    "device": "Yale Assure Lock 2 Touch",
+    "hub": "Google Home",
+    "brand": "Yale",
+    "connection": "WiFi/Bluetooth",
+    "is_compatible": true
+  },
+  {
+    "slug": "aqara-presence-sensor-fp2-apple-homekit",
+    "device": "Aqara Presence Sensor FP2",
+    "hub": "Apple Home",
+    "brand": "Aqara",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "ecobee-enhanced-thermostat-amazon-alexa",
+    "device": "Ecobee Smart Thermostat Enhanced",
+    "hub": "Amazon Alexa",
+    "brand": "Ecobee",
+    "connection": "WiFi",
+    "is_compatible": true,
+    "setup_note": "Enable the Ecobee skill in the Alexa app and sign in with your Ecobee account.",
+    "limitation": "This is a cloud-based connection, not Matter — it requires a working internet connection to respond to Alexa commands."
+  },
+  {
+    "slug": "lifx-clean-antibacterial-bulb-google-home",
+    "device": "LIFX Clean Bulb",
+    "hub": "Google Home",
+    "brand": "LIFX",
+    "connection": "WiFi",
+    "is_compatible": true
+  },
+  {
+    "slug": "wemo-stage-scene-controller-apple-home",
+    "device": "Wemo Stage Scene Controller",
+    "hub": "Apple Home",
+    "brand": "Wemo",
+    "connection": "Thread/Bluetooth",
+    "is_compatible": true
+  },
+  {
+    "slug": "govee-rgbic-tv-backlight-3-lite-apple-homekit",
+    "device": "Govee TV Backlight 3 Lite",
+    "hub": "Apple Home",
+    "brand": "Govee",
+    "connection": "WiFi (No Native Support)",
+    "is_compatible": false
+  }
 ]

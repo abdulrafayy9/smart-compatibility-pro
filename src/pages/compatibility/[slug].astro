@@ -8,6 +8,8 @@ type ProductInfo = {
   is_compatible: boolean;
   amazon_url?: string;
   last_checked?: string;
+  setup_note?: string;
+  limitation?: string;
 };
 
 export async function getStaticPaths(): Promise<any> {
@@ -49,6 +51,8 @@ const hubSlug = toSlug(info.hub);
     <meta name="description" content={pageDescription} />
     <title>Does {info.device} work with {info.hub}? | Compatibility Guide</title>
     <style>
+      .info-box { background: #f1f5f9; border-radius: 8px; padding: 14px 16px; margin-top: 16px; font-size: 14px; line-height: 1.5; }
+      .limitation-box { background: #fffbeb; }
       body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; padding: 40px 20px; margin: 0; }
       .card { background: white; max-width: 600px; margin: 0 auto; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #e2e8f0; }
       .header { padding: 32px; text-align: center; border-bottom: 1px solid #f1f5f9; }
@@ -85,6 +89,16 @@ const hubSlug = toSlug(info.hub);
         ) : (
           <p>Because it connects via <strong>{info.connection}</strong>, this device won't pair with {info.hub} out of the box. You'll likely need a bridge, hub, or workaround — check the manufacturer's current documentation before buying.</p>
         )}
+        {info.setup_note && (
+  <div class="info-box">
+    <strong>Setup:</strong> {info.setup_note}
+  </div>
+)}
+{info.limitation && (
+  <div class="info-box limitation-box">
+    <strong>Keep in mind:</strong> {info.limitation}
+  </div>
+)}
 
         <a href={finalAffiliateUrl} target="_blank" rel="nofollow sponsored" class="affiliate-btn">
           VIEW ON AMAZON →
